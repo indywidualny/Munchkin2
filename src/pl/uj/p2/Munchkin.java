@@ -4,6 +4,8 @@ package pl.uj.p2;
 
 
 import pl.uj.p2.uzbrojenie.Bron;
+import pl.uj.p2.uzbrojenie.Srebrny;
+import pl.uj.p2.uzbrojenie.Stalowy;
 import pl.uj.p2.wyjatki.NiedozwolonaKlasa;
 import pl.uj.p2.wyjatki.NiedozwolonaRasa;
 import pl.uj.p2.wyjatki.NiedozwoloneUzbrojenie;
@@ -51,21 +53,21 @@ public class Munchkin implements InterfejsMunchkina {
 
     public int policzCalkowityPoziom() {
         int premiaRasy = 0;
-        if (rasa != null)
+        if (this.rasa != null)
             premiaRasy = rasa.pobierzPremie();
 
         int premiaKlasy = 0;
-        if (rasa != null)
+        if (this.klasa != null)
             premiaKlasy = klasa.pobierzPremie();
 
         int premiaUzbrojenia = 0;
-        if (this.pobierzBron() != null)
+        if (this.bron != null)
             premiaUzbrojenia = this.pobierzBron().policzPremie(this);
 
         int extra = 0;
-        if (this.rasa == rasa.Ork && this.bron // TODO: jak to zrobic
+        if (this.rasa == rasa.Ork && this.bron instanceof Stalowy)
             extra = 20;
-        else if (this.klasa == klasa.Palladyn && )// TODO: jak to zrobic
+        else if (this.klasa == klasa.Palladyn && this.bron instanceof Srebrny)
             extra = 25;
 
         return this.poziom + premiaRasy + premiaKlasy + premiaUzbrojenia + extra;
