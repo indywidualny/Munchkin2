@@ -76,16 +76,22 @@ public class Munchkin implements InterfejsMunchkina {
     public void przyjmijBron(Bron bron) throws NiedozwoloneUzbrojenie {
         if (bron.czyMoznaUzbroicMunchkina(this))
             this.bron = bron;
+        else
+            throw new NiedozwoloneUzbrojenie("Niedozwolone uzbrojenie");
     }
 
     public void przyjmijKlase(Klasa klasa) throws NiedozwolonaKlasa, NiedozwoloneUzbrojenie {
         if (klasa.czyRasaAkceptowalna(this.rasa))
             this.klasa = klasa;
+        else
+            throw new NiedozwolonaKlasa("Niedozwolona klasa");
     }
 
     public void przyjmijRase(Rasa rasa) throws NiedozwolonaRasa, NiedozwoloneUzbrojenie {
         if (rasa.czyKlasaAkceptowalna(this.klasa))
             this.rasa = rasa;
+        else
+            throw new NiedozwolonaRasa("Niedozwolona rasa");
     }
 
     public void zmniejszSamPoziom(int delta) {
