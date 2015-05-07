@@ -5,6 +5,7 @@ package pl.uj.p2;
 
 import pl.uj.p2.uzbrojenie.Bron;
 import pl.uj.p2.wyjatki.NiedozwolonaKlasa;
+import pl.uj.p2.wyjatki.NiedozwolonaRasa;
 import pl.uj.p2.wyjatki.NiedozwoloneUzbrojenie;
 
 public class Munchkin implements InterfejsMunchkina {
@@ -49,32 +50,31 @@ public class Munchkin implements InterfejsMunchkina {
     }
 
     public int policzCalkowityPoziom() {
-        int calkowityPoziom = 0;
-        // TODO: Metoda oblicza poziom Munchkina uwzględniając jego atrybuty.
-        return calkowityPoziom;
+        return this.poziom + klasa.pobierzPremie() + rasa.pobierzPremie();
     }
 
-    public void przyjmijBron(Bron bron) {
+    public void przyjmijBron(Bron bron) throws NiedozwoloneUzbrojenie {
         // TODO: Metoda ustawia bron Munchkina (nadpisuje wcześniej posiadaną)
         // - ale tylko wtedy, gdy klasa i rasa pozwalają nam używać broni.
+
     }
 
     public void przyjmijKlase(Klasa klasa) throws NiedozwolonaKlasa, NiedozwoloneUzbrojenie {
-        // TODO: Metoda ustawia rasę Munchkina (nadpisuje wcześniej posiadaną)
-        // - ale tylko wtedy, gdy klasa Munchkina nie wyklucza nowej rasy.
+        if (klasa.czyRasaAkceptowalna(this.rasa))
+            this.klasa = klasa;
     }
 
-    public void przyjmijRase(Rasa rasa) {
-        // TODO: Metoda ustawia rasę Munchkina (nadpisuje wcześniej posiadaną)
-        // - ale tylko wtedy, gdy klasa Munchkina nie wyklucza nowej rasy.
+    public void przyjmijRase(Rasa rasa) throws NiedozwolonaRasa, NiedozwoloneUzbrojenie {
+        if (rasa.czyKlasaAkceptowalna(this.klasa))
+            this.rasa = rasa;
     }
 
     public void zmniejszSamPoziom(int delta) {
-        // TODO: Metoda służy do zmniejszania wartości pola poziom.
+        this.poziom = this.poziom - delta;
     }
 
     public void zwiekszSamPoziom(int delta) {
-        // TODO: Metoda służy do zwiększania wartości pola poziom.
+        this.poziom = this.poziom + delta;
     }
 
 }

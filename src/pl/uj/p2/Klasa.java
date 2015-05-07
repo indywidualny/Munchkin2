@@ -23,7 +23,6 @@ public enum Klasa {
         for (int i = 0; i < this.nieakceptowalneRasy.length; i++)
             if (rasa != null && rasa.toString().equals(this.nieakceptowalneRasy[i]))
                 return false;
-
         return true;
     }
 
