@@ -7,6 +7,7 @@ import pl.uj.p2.uzbrojenie.Bron;
 import pl.uj.p2.wyjatki.NiedozwolonaKlasa;
 import pl.uj.p2.wyjatki.NiedozwolonaRasa;
 import pl.uj.p2.wyjatki.NiedozwoloneUzbrojenie;
+import pl.uj.p2.wyjatki.WyjatekMunchkina;
 
 public class Munchkin implements InterfejsMunchkina {
 
