@@ -50,7 +50,25 @@ public class Munchkin implements InterfejsMunchkina {
     }
 
     public int policzCalkowityPoziom() {
-        return this.poziom + klasa.pobierzPremie() + rasa.pobierzPremie();
+        int premiaRasy = 0;
+        if (rasa != null)
+            premiaRasy = rasa.pobierzPremie();
+
+        int premiaKlasy = 0;
+        if (rasa != null)
+            premiaKlasy = klasa.pobierzPremie();
+
+        int premiaUzbrojenia = 0;
+        if (this.pobierzBron() != null)
+            premiaUzbrojenia = this.pobierzBron().policzPremie(this);
+
+        int extra = 0;
+        if (this.rasa == rasa.Ork && this.bron // TODO: jak to zrobic
+            extra = 20;
+        else if (this.klasa == klasa.Palladyn && )// TODO: jak to zrobic
+            extra = 25;
+
+        return this.poziom + premiaRasy + premiaKlasy + premiaUzbrojenia + extra;
     }
 
     public void przyjmijBron(Bron bron) throws NiedozwoloneUzbrojenie {
