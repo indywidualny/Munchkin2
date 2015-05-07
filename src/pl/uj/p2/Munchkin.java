@@ -74,32 +74,62 @@ public class Munchkin implements InterfejsMunchkina {
     }
 
     public void przyjmijBron(Bron bron) throws NiedozwoloneUzbrojenie {
-        if (bron.czyMoznaUzbroicMunchkina(this))
+        if (bron == null)
+            this.bron = null;
+        else if (bron.czyMoznaUzbroicMunchkina(this))
             this.bron = bron;
-        else
-            throw new NiedozwoloneUzbrojenie("Niedozwolone uzbrojenie");
+        else {
+            this.bron = null;
+            throw new NiedozwoloneUzbrojenie("Niedozwolone bron");
+        }
     }
 
     public void przyjmijKlase(Klasa klasa) throws NiedozwolonaKlasa, NiedozwoloneUzbrojenie {
-        if (klasa.czyRasaAkceptowalna(this.rasa))
+        if (klasa == null) {
+            this.klasa = null;
+            if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
+                this.bron = null;
+                throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
+            }
+        } else if (klasa.czyRasaAkceptowalna(this.rasa)) {
             this.klasa = klasa;
-        else
+            if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
+                this.bron = null;
+                throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
+            }
+        } else
             throw new NiedozwolonaKlasa("Niedozwolona klasa");
     }
 
     public void przyjmijRase(Rasa rasa) throws NiedozwolonaRasa, NiedozwoloneUzbrojenie {
-        if (rasa.czyKlasaAkceptowalna(this.klasa))
+        if (rasa == null) {
+            this.rasa = null;
+            if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
+                this.bron = null;
+                throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
+            }
+        } else if (rasa.czyKlasaAkceptowalna(this.klasa)) {
             this.rasa = rasa;
-        else
+            if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
+                this.bron = null;
+                throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
+            }
+        } else
             throw new NiedozwolonaRasa("Niedozwolona rasa");
     }
 
     public void zmniejszSamPoziom(int delta) {
-        this.poziom = this.poziom - delta;
+        if (this.poziom - delta < 0)
+            this.poziom = 0;
+        else
+            this.poziom = this.poziom - delta;
     }
 
     public void zwiekszSamPoziom(int delta) {
-        this.poziom = this.poziom + delta;
+        if (this.poziom + delta < 0)  // w razie zwiekszania o ujemna
+            this.poziom = 0;
+        else
+            this.poziom = this.poziom + delta;
     }
 
 }
