@@ -91,7 +91,13 @@ public class Munchkin implements InterfejsMunchkina {
                 this.bron = null;
                 throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
             }
-        } else if (klasa.czyRasaAkceptowalna(this.rasa)) {
+        } else if (this.rasa == null) {
+            this.klasa = klasa;
+            if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
+                this.bron = null;
+                throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
+            }
+        } else if (this.rasa.czyKlasaAkceptowalna(klasa)) {
             this.klasa = klasa;
             if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
                 this.bron = null;
@@ -108,7 +114,13 @@ public class Munchkin implements InterfejsMunchkina {
                 this.bron = null;
                 throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
             }
-        } else if (rasa.czyKlasaAkceptowalna(this.klasa)) {
+        } else if (this.klasa == null ) {
+            this.rasa = rasa;
+            if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
+                this.bron = null;
+                throw new NiedozwoloneUzbrojenie("Niedozwolona bron");
+            }
+        } else if (this.klasa.czyRasaAkceptowalna(rasa)) {
             this.rasa = rasa;
             if (this.bron != null && !this.bron.czyMoznaUzbroicMunchkina(this)) {
                 this.bron = null;
