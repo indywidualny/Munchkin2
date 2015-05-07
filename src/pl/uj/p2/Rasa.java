@@ -26,7 +26,7 @@ public enum Rasa {
         return true;
     }
 
-    int	pobierzPremie() {
+    public int	pobierzPremie() {
         return premiaDoPoziomu;
     }
 

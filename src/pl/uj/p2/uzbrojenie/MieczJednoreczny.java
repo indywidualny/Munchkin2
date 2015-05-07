@@ -10,7 +10,9 @@ public class MieczJednoreczny extends Miecz {
     public MieczJednoreczny() { }
 
     public int policzPremie(InterfejsMunchkina munchkin) {
-        return 2 * munchkin.pobierzKlasa().pobierzPremie();
+        if (munchkin.pobierzRasa() != null)
+            return super.policzPremie(munchkin) * munchkin.pobierzRasa().pobierzPremie();
+        return super.policzPremie(munchkin);
     }
 
 }
