@@ -54,9 +54,8 @@ public class Munchkin implements InterfejsMunchkina {
     }
 
     public void przyjmijBron(Bron bron) throws NiedozwoloneUzbrojenie {
-        // TODO: Metoda ustawia bron Munchkina (nadpisuje wcześniej posiadaną)
-        // - ale tylko wtedy, gdy klasa i rasa pozwalają nam używać broni.
-
+        if (bron.czyMoznaUzbroicMunchkina(this))
+            this.bron = bron;
     }
 
     public void przyjmijKlase(Klasa klasa) throws NiedozwolonaKlasa, NiedozwoloneUzbrojenie {
